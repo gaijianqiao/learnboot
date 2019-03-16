@@ -1,6 +1,8 @@
 package my.learn.boot.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,12 @@ public class BootController {
     }
 
     @ApiOperation("a post request, it will say hell to the name you sended.")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name="name",value = "名称",dataType = "string",required = false,paramType = "query")
+    )
     @ResponseBody
     @RequestMapping(value = "/sayhello",method = RequestMethod.POST )
-    public String say(@RequestParam(value = "name",required = true) String myName)
+    public String say(@RequestParam(value = "name") String myName)
     {
         return "say "+myName+" hello";
     }
